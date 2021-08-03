@@ -20,7 +20,7 @@ curl_copy()
     TARGET=$3
 
     LAST_COMMAND="curl -s $SOURCE -o $TARGET"
-    echo -n "Coping $FILENAME ... "
+    echo -n "Copying $FILENAME ... "
 
     $LAST_COMMAND > /dev/null
     LAST_STATUS=$?
