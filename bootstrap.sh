@@ -5,7 +5,8 @@ BASE_URL=https://raw.githubusercontent.com/semenovf/scripts/master
 SCRIPTS="build.sh \
     build-windows.cmd"
 
-CONFIGS=".gitignore \
+CONFIGS="CMakeLists.txt \
+    .gitignore \
     .travis.yml \
     appveyor.yml \
     codecov.yml"
@@ -28,7 +29,7 @@ curl_copy()
     if [ $LAST_STATUS -eq 0 ] ; then
         echo "OK"
     else
-        echo "Failure on command"
+        echo "ERROR: failure on command"
         echo "\t$LAST_COMMAND"
     fi
 }
@@ -43,3 +44,22 @@ for f in $CONFIGS ; do
     [ $LAST_STATUS -ne 0 ] && exit 1
 done
 
+echo "\nNow it is time to edit CMakeLists.txt to complete project basic initialization"
+
+if [ -z "${EDITOR}" ] ; then
+    if command -v mcedit > /dev/null ; then
+        EDITOR=mcedit
+    elif command -v nano > /dev/null ; then
+        EDITOR=nano
+    elif command -v vim > /dev/null ; then
+        EDITOR=vim
+    elif command -v vi > /dev/null ; then
+        EDITOR=vi
+    else
+        echo "ERROR: No any known editor found"
+    fi
+fi
+
+if [ -n "${EDITOR}" ] ; then
+    $EDITOR CMakeLists.txt
+fi
