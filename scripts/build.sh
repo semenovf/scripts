@@ -7,9 +7,10 @@
 # Changelog:
 #      2021.05.20 Initial version.
 #      2021.11.07 Added PROJECT_OPT_PREFIX variable.
+#      2021.11.08 SOURCE_DIR recognition modified.
 ################################################################################
 
-CMAKE_OPTIONS=
+CMAKE_OPTIONS="${CMAKE_OPTIONS}"
 
 if [ -z "$PROJECT_OPT_PREFIX" ] ; then
     echo "ERROR: PROJECT_OPT_PREFIX is mandatory." >&2
@@ -110,12 +111,14 @@ if [ -d .git ] ; then
     if [ -z "$ENABLE_COVERAGE" ] ; then
         SOURCE_DIR=`pwd`
     fi
-    cd ..
+    BUILD_DIR="../$BUILD_DIR"
 fi
 
 if [ -z "$SOURCE_DIR" ] ; then
-    if [ -d src/.git ] ; then
-        SOURCE_DIR=`pwd`/src
+    # We are inside subdirectory (usually from scripts directory)
+    if [ -d ../.git ] ; then
+        SOURCE_DIR=`pwd`/..
+        BUILD_DIR="../../$BUILD_DIR"
     else
         echo "ERROR: SOURCE_DIR must be specified" >&2
         exit 1
