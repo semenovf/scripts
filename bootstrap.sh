@@ -53,28 +53,28 @@ done
 ######################################################
 # portable-target
 ######################################################
-mkdir -p cmake/portable-target/actions
-
-PORTABLE_TARGET="ColouredMessage.cmake \
-    Functions.cmake \
-    PortableTarget.cmake"
-
-PORTABLE_TARGET_ACTIONS="add_executable.cmake \
-    add_library.cmake \
-    compile_options.cmake \
-    definitions.cmake \
-    include_directories.cmake \
-    link_libraries.cmake \
-    link_qt5_components.cmake \
-    properties.cmake \
-    sources.cmake"
-
-for f in $PORTABLE_TARGET ; do
-    curl_copy $PORTABLE_TARGET_BASE_URL/${f} cmake/portable-target/$f
-    [ $LAST_STATUS -ne 0 ] && exit 1
-done
-
-for f in $PORTABLE_TARGET_ACTIONS ; do
-    curl_copy $PORTABLE_TARGET_BASE_URL/actions/${f} cmake/portable-target/actions/$f
-    [ $LAST_STATUS -ne 0 ] && exit 1
-done
+#mkdir -p cmake/portable-target/actions
+#
+#PORTABLE_TARGET="ColouredMessage.cmake \
+#    Functions.cmake \
+#    PortableTarget.cmake"
+#
+#PORTABLE_TARGET_ACTIONS="add_executable.cmake \
+#    add_library.cmake \
+#    compile_options.cmake \
+#    definitions.cmake \
+#    include_directories.cmake \
+#    link_libraries.cmake \
+#    link_qt5_components.cmake \
+#    properties.cmake \
+#    sources.cmake"
+#
+#for f in $PORTABLE_TARGET ; do
+#    curl_copy $PORTABLE_TARGET_BASE_URL/${f} cmake/portable-target/$f
+#    [ $LAST_STATUS -ne 0 ] && exit 1
+#done
+#
+#for f in $PORTABLE_TARGET_ACTIONS ; do
+#    curl_copy $PORTABLE_TARGET_BASE_URL/actions/${f} cmake/portable-target/actions/$f
+#    [ $LAST_STATUS -ne 0 ] && exit 1
+#done
