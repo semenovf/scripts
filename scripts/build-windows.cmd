@@ -10,6 +10,8 @@
 
 @echo off
 
+setlocal ENABLEDELAYEDEXPANSION
+
 set "CMAKE_OPTIONS=!CMAKE_OPTIONS!"
 
 if "%PROJECT_OPT_PREFIX%" == "" (
@@ -20,8 +22,6 @@ if "%PROJECT_OPT_PREFIX%" == "" (
 :: ENABLEDELAYEDEXPANSION need to work such things properly:
 ::      set "CMAKE_OPTIONS="!CMAKE_OPTIONS! ..."
 ::      set "BUILD_DIR=!BUILD_DIR! ..." 
-
-setlocal ENABLEDELAYEDEXPANSION
 
 if "%BUILD_GENERATOR%" == "" (
     @echo Detecting build generator ...
@@ -100,6 +100,10 @@ if "%BUILD_DIR%" == "" (
         set "BUILD_DIR=!BUILD_DIR!.cxx%CXX_STANDARD%" 
     )
 
+    if not "%BUILD_DIR_SUFFIX%" == "" (
+        set "BUILD_DIR=!BUILD_DIR!%BUILD_DIR_SUFFIX%"
+    )
+
     if not "%ENABLE_COVERAGE%" == "" (
         set "BUILD_DIR=!BUILD_DIR!.coverage" 
     )
@@ -134,7 +138,8 @@ cd "%BUILD_DIR%" ^
     && cmake -G "%BUILD_GENERATOR%" %CMAKE_OPTIONS% "%SOURCE_DIR%" ^
     && cmake --build .
 
-if "%BUILD_TESTS%" == "ON" ctest
+::if "%BUILD_TESTS%" == "ON" ctest -C %BUILD_TYPE% --verbose
+if "%BUILD_TESTS%" == "ON" ctest -C %BUILD_TYPE%
 if "%ENABLE_COVERAGE%" == "ON" cmake --build . --target Coverage
 
 endlocal
