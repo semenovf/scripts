@@ -10,6 +10,9 @@
 
 @echo off
 
+:: ENABLEDELAYEDEXPANSION need to work such things properly:
+::      set "CMAKE_OPTIONS="!CMAKE_OPTIONS! ..."
+::      set "BUILD_DIR=!BUILD_DIR! ..." 
 setlocal ENABLEDELAYEDEXPANSION
 
 set "CMAKE_OPTIONS=!CMAKE_OPTIONS!"
@@ -18,10 +21,6 @@ if "%PROJECT_OPT_PREFIX%" == "" (
     @echo ERROR: PROJECT_OPT_PREFIX is mandatory >&2
     exit /b 1
 )
-
-:: ENABLEDELAYEDEXPANSION need to work such things properly:
-::      set "CMAKE_OPTIONS="!CMAKE_OPTIONS! ..."
-::      set "BUILD_DIR=!BUILD_DIR! ..." 
 
 if "%BUILD_GENERATOR%" == "" (
     @echo Detecting build generator ...
