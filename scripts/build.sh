@@ -77,9 +77,6 @@ if [ -n "$BUILD_TESTS" ] ; then
     CMAKE_OPTIONS="$CMAKE_OPTIONS -D${PROJECT_OPT_PREFIX}BUILD_TESTS=$BUILD_TESTS"
 fi
 
-if /i "%CTEST_VERBOSE%" == "on" (
-    set "CTEST_OPTIONS=--verbose !CTEST_OPTIONS!"
-)
 if [ -n $CTEST_VERBOSE ] ; then
     case $CTEST_VERBOSE in
         [Oo][Nn])
