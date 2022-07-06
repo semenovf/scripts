@@ -157,5 +157,5 @@ mkdir -p ${BUILD_DIR} \
     && cd ${BUILD_DIR} \
     && cmake -G "${BUILD_GENERATOR}" $CMAKE_OPTIONS $SOURCE_DIR \
     && cmake --build . \
-    && [ -n "$BUILD_TESTS" ] && ctest $CTEST_OPTIONS -C $BUILD_TYPE
+    && [ -n "$BUILD_TESTS" ] && ctest $CTEST_OPTIONS -C $BUILD_TYPE \
     && [ -n "$ENABLE_COVERAGE" ] && cmake --build . --target Coverage
