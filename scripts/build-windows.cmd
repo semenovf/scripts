@@ -111,6 +111,10 @@ if "%BUILD_DIR%" == "" (
     )
 )
 
+if not "%BUILD_DIR_SUFFIX%" == "" (
+    set "BUILD_DIR=!BUILD_DIR!%BUILD_DIR_SUFFIX%" 
+)
+
 ::
 :: We are inside source directory
 :: 
