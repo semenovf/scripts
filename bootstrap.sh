@@ -38,8 +38,10 @@ curl_copy()
     fi
 }
 
+mkdir -p scripts
+
 for f in $SCRIPTS ; do
-    curl_copy $BASE_URL/scripts/${f} $f
+    curl_copy $BASE_URL/scripts/${f} scripts/$f
     [ $LAST_STATUS -ne 0 ] && exit 1
 done
 
