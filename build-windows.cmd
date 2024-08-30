@@ -11,6 +11,7 @@
 ::                 Added BUILD_VERBOSITY variable.
 ::      2022.11.06 Added `Visual Studio 17 2022` generator.
 ::      2024.04.06 Refactored according to `build-linux.sh`.
+::      2024.08.30 Fixed run tests after building them.
 ::-------------------------------------------------------------------------------
 
 @echo off
@@ -101,7 +102,7 @@ if "%BUILD_JOBS%" == "" set BUILD_JOBS=%NUMBER_OF_PROCESSORS%
 :: Valid values for MSBuild verbosity option.
 :: q[uiet], m[inimal], n[ormal] (default), d[etailed], and diag[nostic].
 
-if "%BUILD_VERBOSITY%" == "" set BUILD_VERBOSITY=diagnostic
+if "%BUILD_VERBOSITY%" == "" set BUILD_VERBOSITY=quiet
 
 if /i "%BUILD_STRICT%" == "off" (
     set "CMAKE_OPTIONS=!CMAKE_OPTIONS! -D%PROJECT_OPT_PREFIX%BUILD_STRICT=OFF"
@@ -129,6 +130,7 @@ if /i "%BUILD_TESTS%" == "off" (
     set "CMAKE_OPTIONS=!CMAKE_OPTIONS! -D%PROJECT_OPT_PREFIX%BUILD_TESTS=OFF"
 ) else (
     set "CMAKE_OPTIONS=!CMAKE_OPTIONS! -D%PROJECT_OPT_PREFIX%BUILD_TESTS=ON"
+    set "BUILD_TESTS=ON"
 )
 
 if /i "%CTEST_VERBOSE%" == "on" (
